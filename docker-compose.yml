@@ -1,24 +1,11 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  portfolio_web:
-    # Use the official Nginx stable image
-    image: nginx:stable-alpine
-    
-    # Map container port 80 (where Nginx runs) to host port 80
+  portfolio:
+    image: nginx:alpine
+    container_name: portfolio_site
     ports:
-      - "80:80"
-      
-    # Mounts the local index.html file directly into the container's web root.
-    # This ensures that when you update your local index.html, the container serves the new content immediately.
+      - "4500:80"   # change 4500 to any port you want
     volumes:
-      - ./index.html:/usr/share/nginx/html/index.html:ro
-      
-    # Restart the container if it stops, ensuring high availability
-    restart: always
-    
-    # Optional: Good practice labels
-    container_name: rutik_devops_portfolio
-    labels:
-      - "app.name=rutik-portfolio"
-      - "service.type=static-web"
+      - ./index.html:/usr/share/nginx/html/index.html
+    restart: unless-stopped
