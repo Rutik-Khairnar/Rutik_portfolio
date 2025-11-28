@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutik Khairnar | DevOps - Modern Vapour Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Modern Vapour (Dark Slate #1A202C, Electric Violet #7A33FF, Bright Cyan #00C4FF) -->
+    <!-- Application Structure Plan: A clean, professional flow: Hero (Value), Impact/Data (Cost Savings first), Skills (Visually connected flow/diagram), Experience/Education, Secondary Projects, and Credentials/Contact. This architecture emphasizes quantifiable results and comprehensive skills over simple chronology. -->
+    <!-- Visualization & Content Choices: 1. Skills: Report Info -> Comprehensive list. Goal -> Show integrated CI/CD flow. Viz/Method -> Linked card groups (HTML/CSS) representing phases with clean icons. Justification -> Modern, visual communication of the DevOps loop. 2. Cost Savings: Report Info -> $238.16 saved. Goal -> Highlight fiscal impact. Viz/Method -> Chart.js Bar Chart in a prominent, Cyan-highlighted card. 3. Animation: Use 'fade-in' on scroll and subtle elevation effects on cards for high-quality interaction. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        /* --- COLOR VARIABLES START HERE --- */
+        /* Modern Vapour Theme */
+        :root {
+            --bg-primary: #FFFFFF;         /* Clean White */
+            --bg-secondary: #F7F9FC;       /* Very Light Gray/Blue */
+            --header-color: #1A202C;       /* Dark Slate/Navy */
+            --accent-color: #7A33FF;       /* Electric Violet */
+            --savings-color: #00C4FF;      /* Bright Cyan (Success) */
+            --secondary-accent: #FF3366;   /* Hot Pink (for previous bill/contrast) */
+            --text-color: #1A202C;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-secondary);
+            color: #1F2937;
+        }
+        .header-bg {
+            background-color: var(--header-color);
+        }
+        .accent-text {
+            color: var(--accent-color);
+        }
+        .accent-bg {
+            background-color: var(--accent-color);
+        }
+        .flow-card {
+            background-color: var(--bg-primary);
+            border: 1px solid #E5E7EB;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .flow-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+        .timeline-item {
+            border-left: 3px solid var(--header-color);
+            padding-left: 1.5rem;
+            margin-left: 1rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            border: 3px solid var(--bg-secondary);
+            z-index: 10;
+        }
+        /* Fade In Effect Class */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Styling for the new SVG symbol */
+        .devops-svg-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            /* Remove all vertical margins to make it tight */
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .devops-svg-container svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="sticky top-0 z-50 header-bg shadow-xl">
+        <nav class="container mx-auto max-w-7xl px-4 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-black text-white tracking-wider flex items-center">
+                Rutik Khairnar
+            </a>
+            
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="nav-link text-gray-300 hover:text-white font-medium transition duration-200">Home</a>
+                <a href="#impact" class="nav-link text-gray-300 hover:text-white font-medium transition duration-200">Impact Data</a>
+                <a href="#skills" class="nav-link text-gray-300 hover:text-white font-medium transition duration-200">The Flow</a>
+                <a href="#experience" class="nav-link text-gray-300 hover:text-white font-medium transition duration-200">Education</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-white font-medium transition duration-200">Projects</a>
+                <a href="#certifications" class="nav-link text-gray-300 hover:text-white font-medium transition duration-200">Credentials</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white font-medium transition duration-200">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center text-center px-4 py-24" style="background-color: var(--bg-primary);">
+            <div class="max-w-4xl fade-in bg-white/90 p-8 md:p-12 rounded-xl shadow-2xl">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 mb-4">
+                    Rutik Khairnar
+                </h1>
+                <p class="text-3xl md:text-4xl font-extrabold header-bg text-white inline-block px-4 py-2 rounded-lg tracking-wide mb-0">
+                    DevOps & Cloud Automation Engineer
+                </p>
+                 
+                 <!-- START: CUSTOM DEVOPS INFINITY SYMBOL (Subtly sized) -->
+                 <div class="devops-svg-container mt-2 mb-2">
+                    <svg width="350" height="180" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <!-- Adapting gradient colors to the Modern Vapour theme -->
+                                <stop offset="0%" stop-color="var(--accent-color)"/>
+                                <stop offset="100%" stop-color="var(--secondary-accent)"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <path d="M90,90 C90,50 150,50 175,90 C200,130 260,130 260,90 C260,50 200,50 175,90 C150,130 90,130 90,90 Z"
+                            fill="none"
+                            stroke="url(#grad)"
+                            stroke-width="25"
+                            stroke-linecap="round" />
+                        
+                        <text x="50%" y="50%" text-anchor="middle" dy=".35em" 
+                            font-size="24" font-family="Inter, sans-serif" fill="var(--text-color)" font-weight="800">
+                            DevOps
+                        </text>
+                    </svg>
+                </div>
+                <!-- END: CUSTOM DEVOPS INFINITY SYMBOL -->
+                
+                <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10">
+                    A specialist in creating robust CI/CD pipelines, optimizing cloud expenditure, and ensuring continuous delivery across development and operations cycles.
+                </p>
+                <div class="flex flex-wrap justify-center space-x-4">
+                    <a href="https://www.linkedin.com/in/rutik-khairnar" target="_blank" class="accent-bg text-white font-bold py-3 px-6 rounded-lg text-lg flow-card hover:opacity-90" style="background-color: var(--accent-color);">
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/Rutik-Khairnar" target="_blank" class="header-bg text-white font-bold py-3 px-6 rounded-lg text-lg flow-card hover:opacity-90" style="background-color: var(--header-color);">
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Impact/Projects (Immediate Proof) -->
+        <section id="impact" class="py-24" style="background-color: var(--bg-primary);">
+            <div class="container mx-auto max-w-6xl px-4 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Quantifiable Impact: AWS Cost Optimization</h2>
+                    <p class="text-lg text-gray-600">Delivering immediate financial value through engineering analysis.</p>
+                </div>
+
+                <!-- Cost Optimization Project Card -->
+                <div class="rounded-xl flow-card p-6 md:p-10 mb-12 border-t-8 border-green-500 fade-in" style="border-top-color: var(--savings-color);">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-3xl font-bold text-gray-800 mb-3 accent-text" style="color: var(--accent-color);">The $2,857 Annual Saving</h3>
+                            <p class="text-xl font-bold mb-4" style="color: var(--savings-color);">
+                                Result: Achieved $238.16 Monthly Savings.
+                            </p>
+                            <p class="text-gray-600 mb-4">
+                                I performed a deep-dive analysis of four AWS EC2 instances (initial monthly bill: $987). By applying cost optimization strategies and rightsizing unused resources, I secured a reduction of **$238.16 per month**, projected to save the company over **~₹2,49,000** annually.
+                            </p>
+                            <p class="text-gray-600 font-medium">
+                                This project showcases expertise in AWS Billing, CloudWatch monitoring, and FinOps practices under production constraints.
+                            </p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="costChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Skills Toolkit - THE CONTINUOUS FLOW -->
+        <section id="skills" class="py-24" style="background-color: var(--bg-secondary);">
+            <div class="container mx-auto max-w-7xl px-4 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">The CI/CD Continuous Flow</h2>
+                    <p class="text-lg text-gray-600">My comprehensive toolkit mapped to the phases of Continuous Delivery.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-5 gap-6">
+                    <!-- Phase 1: PLAN & CODE -->
+                    <div class="flow-card p-6 rounded-xl fade-in border-t-4 border-blue-500" style="border-top-color: var(--accent-color);">
+                        <h3 class="text-xl font-bold mb-3 flex items-center" style="color: var(--header-color);">CODE/VCS 💻</h3>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <p>🐙 Git & GitHub</p>
+                            <p>📜 Bash Scripting</p>
+                            <p>C/C++, HTML5, JS</p>
+                            <p>Node Js, Dotnet</p>
+                        </div>
+                    </div>
+
+                    <!-- Flow Arrow -->
+                    <div class="hidden lg:flex items-center justify-center fade-in">
+                        <span class="text-5xl text-gray-400">➡️</span>
+                    </div>
+
+                    <!-- Phase 2: BUILD & ARTIFACTS -->
+                    <div class="flow-card p-6 rounded-xl fade-in border-t-4 border-yellow-500" style="border-top-color: var(--accent-color);">
+                        <h3 class="text-xl font-bold mb-3 flex items-center" style="color: var(--header-color);">BUILD/TEST 🛠️</h3>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <p>⚙️ Jenkins (Basic Pipeline)</p>
+                            <p>🛡️ SonarQube</p>
+                            <p>📦 Nexus Repository</p>
+                            <p>Maven lifecycle, Npm</p>
+                        </div>
+                    </div>
+
+                    <!-- Flow Arrow -->
+                    <div class="hidden lg:flex items-center justify-center fade-in">
+                        <span class="text-5xl text-gray-400">➡️</span>
+                    </div>
+
+                    <!-- Phase 3: DEPLOY & INFRA -->
+                    <div class="flow-card p-6 rounded-xl fade-in border-t-4 border-red-500" style="border-top-color: var(--accent-color);">
+                        <h3 class="text-xl font-bold accent-text mb-3 flex items-center" style="color: var(--header-color);">DEPLOY/INFRA 🚢</h3>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <p>🐳 Docker & Compose/Swarm</p>
+                            <p>🤖 Ansible (Playbook)</p>
+                            <p>🐧 Linux / Serveravatar</p>
+                            <p>☁️ AWS (EC2, S3, IAM)</p>
+                            <p>🌐 Reverse Proxy / Dokeploy</p>
+                        </div>
+                    </div>
+
+                    <!-- Break for Mobile / Final Phase for Desktop -->
+                </div>
+                
+                <div class="lg:hidden flex items-center justify-center fade-in" style="padding-top: 1rem; padding-bottom: 1rem;">
+                    <span class="text-5xl text-gray-400">⬇️</span>
+                </div>
+
+                <!-- Phase 4 (Full Width for alignment) -->
+                <div class="flex justify-center mt-6">
+                    <div class="flow-card p-6 rounded-xl fade-in border-t-4 border-green-500 max-w-lg w-full" style="border-top-color: var(--savings-color);">
+                        <h3 class="text-xl font-bold mb-3 flex items-center justify-center" style="color: var(--savings-color);">OPERATE & MONITOR 📊</h3>
+                        <div class="flex justify-center space-x-6 text-sm text-gray-700">
+                            <p>🔥 Prometheus</p>
+                            <p>📈 Grafana</p>
+                            <p>💰 Cost Optimization / Billing</p>
+                            <p>🛡️ Security Awareness</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Education -->
+        <section id="experience" class="py-24" style="background-color: var(--bg-primary);">
+            <div class="container mx-auto max-w-6xl px-4 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Left Column: Education -->
+                    <div>
+                        <div class="mb-12 fade-in">
+                            <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Educational Background</h2>
+                            <p class="text-lg text-gray-600">Cloud Computing focus to build a strong infrastructure foundation.</p>
+                        </div>
+                        
+                        <!-- MCA -->
+                        <div class="timeline-item pb-10 fade-in">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Master of Computer Application (Cloud Computing)</h3>
+                            <p class="text-lg text-gray-700 mb-1">Parul University, Vadodara, India</p>
+                            <p class="text-sm text-gray-500 mb-3">Sept 2022 - May 2024 (CGPA 7.87/10)</p>
+                        </div>
+                        
+                        <!-- BSc -->
+                        <div class="timeline-item fade-in">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Bachelor of Computer Science</h3>
+                            <p class="text-lg text-gray-700 mb-1">SSR College, SPPU (Pune University), Silvassa, India</p>
+                            <p class="text-sm text-gray-500 mb-3">June 2019 - Aug 2022 (CGPA 9.06/10)</p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Professional Experience -->
+                    <div>
+                        <div class="mb-12 fade-in">
+                            <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Work Experience</h2>
+                            <p class="text-lg text-gray-600">Translating academic knowledge into industry results.</p>
+                        </div>
+
+                        <!-- Current Role: Wizcoder -->
+                        <div class="timeline-item pb-10 fade-in">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">DevOps Engineer</h3>
+                            <p class="text-lg text-gray-700 mb-1">Wizcoder, Surat</p>
+                            <p class="text-sm text-gray-500 mb-3 accent-text" style="color: var(--accent-color);">Aug 2024 - Present</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-base">
+                                <li>Executed the high-value cost optimization efforts (see Impact section).</li>
+                                <li>Responsible for core AWS operations and cloud resource management (EC2, S3, IAM).</li>
+                                <li>Managed and deployed containerized applications using Docker and Docker Compose.</li>
+                                <li>Focused on CI/CD maturity, scaling infrastructure, and robust Prometheus/Grafana monitoring.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Previous Role: 1Rivet (Internship & Transition) -->
+                        <div class="timeline-item fade-in">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">DevOps Intern / Engineer</h3>
+                            <p class="text-lg text-gray-700 mb-1">1Rivet, Valsad</p>
+                            <p class="text-sm text-gray-500 mb-3 accent-text" style="color: var(--accent-color);">Jan 2025 - Mar 2025 (and prior internship)</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-base">
+                                <li>Automated CI/CD pipelines via Bash scripting and utilized Ansible playbooks.</li>
+                                <li>Gained foundational hands-on knowledge in Linux, Jenkins, and cyber security principles.</li>
+                                <li>Core DevOps learning in: Linux, Bash Scripting, CI/CD, Ansible, and Cyber Security tools.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secondary Projects -->
+        <section id="projects" class="py-24" style="background-color: var(--bg-secondary);">
+            <div class="container mx-auto max-w-6xl px-4 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Software Development Projects</h2>
+                    <p class="text-lg text-gray-600">Demonstrating full-stack understanding beyond infrastructure.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Project 1: E-commerce Website -->
+                    <div class="flow-card p-8 rounded-xl fade-in" style="border-left: 4px solid var(--accent-color);">
+                        <h4 class="text-2xl font-bold text-gray-800 mb-3">E-commerce Website (OMG Optical)</h4>
+                        <p class="text-gray-600 mb-4">
+                            Developed a user-friendly e-commerce platform using **Node.js, MongoDB**, and implemented critical security features. (Jan 2024 - Apr 2024)
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2 text-base ml-4">
+                            <li>Implemented secure user signup/login using **Twilio API for OTP authentication**.</li>
+                            <li>Integrated dummy payment gateway functionality using **Stripe API**.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Project 2: Online Examination System -->
+                    <div class="flow-card p-8 rounded-xl fade-in" style="border-left: 4px solid var(--accent-color);">
+                        <h4 class="text-2xl font-bold text-gray-800 mb-3">Online Examination System</h4>
+                        <p class="text-gray-600 mb-4">
+                            Developed a comprehensive assessment platform using **PHP, MySQL, and Apache Server**. (Mar 2022 - Jun 2022)
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2 text-base ml-4">
+                            <li>Handled computerized grading, detailed feedback delivery, and secure submission logic.</li>
+                            <li>Emphasized user management with secure login/signup functionality.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications" class="py-24" style="background-color: var(--bg-primary);">
+            <div class="container mx-auto max-w-6xl px-4 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Professional Credentials & Training</h2>
+                    <p class="text-lg text-gray-600">Formal validation of cloud expertise, security awareness, and full-stack fundamentals.</p>
+                </div>
+                
+                <!-- Core Credentials Grid -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Core Cloud & DevOps Credentials</h3>
+                    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                        
+                        <!-- AZ-900 -->
+                        <div class="flow-card p-6 text-center fade-in border-t-4 border-blue-500" style="border-top-color: var(--header-color);">
+                            <p class="text-5xl mb-2">🛡️</p>
+                            <h4 class="font-bold text-xl text-blue-800" style="color: var(--header-color);">Azure Fundamentals</h4>
+                            <p class="text-sm text-gray-600 mb-2">AZ-900 Certified <span class="font-semibold">(Microsoft Certified)</span></p>
+                            <p class="text-sm text-gray-500">Validated core cloud concepts, security, and networking principles essential for multi-cloud infrastructure management.</p>
+                        </div>
+                        
+                        <!-- AI-900 -->
+                        <div class="flow-card p-6 text-center fade-in border-t-4 border-green-500" style="border-top-color: var(--header-color);">
+                            <p class="text-5xl mb-2">🧠</p>
+                            <h4 class="font-bold text-xl text-green-800" style="color: var(--header-color);">Azure AI Fundamentals</h4>
+                            <p class="text-sm text-gray-600 mb-2">AI-900 Certified <span class="font-semibold">(Microsoft Certified)</span></p>
+                            <p class="text-sm text-gray-500">Demonstrates understanding of AI workloads, crucial for deploying and managing modern data science pipelines.</p>
+                        </div>
+                        
+                        <!-- NPTEL Cloud Computing -->
+                        <div class="flow-card p-6 text-center fade-in border-t-4 border-yellow-500" style="border-top-color: var(--header-color);">
+                            <p class="text-5xl mb-2">☁️</p>
+                            <h4 class="font-bold text-xl text-yellow-800" style="color: var(--header-color);">NPTEL Cloud Computing</h4>
+                            <p class="text-sm text-gray-600 mb-2">Aggregate: 69%</p>
+                            <p class="text-sm text-gray-500">Confirms deep theoretical knowledge in distributed systems, virtualization, and cloud architecture design.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Training Grid (Updated to be more professional) -->
+                <div class="fade-in mt-12">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Supporting Technical Depth & Training</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- PostgreSQL -->
+                        <div class="bg-gray-50 rounded-xl flow-card p-4 text-center fade-in border-t-2 border-indigo-500" style="border-top-color: var(--accent-color);">
+                            <p class="text-3xl mb-1">💾</p>
+                            <h4 class="font-bold" style="color: var(--header-color);">PostgreSQL Database Mgmt.</h4>
+                            <p class="text-sm text-gray-600 mb-1">Aggregate: 77.50%</p>
+                            <p class="text-xs text-gray-500">Focus on production database management and relational data integrity, vital for high-availability deployments.</p>
+                        </div>
+                        <!-- PHP/MySQL -->
+                        <div class="bg-gray-50 rounded-xl flow-card p-4 text-center fade-in border-t-2 border-purple-500" style="border-top-color: var(--accent-color);">
+                            <p class="text-3xl mb-1">🖥️</p>
+                            <h4 class="font-bold" style="color: var(--header-color);">PHP & MySQL Proficiency</h4>
+                            <p class="text-sm text-gray-600 mb-1">Aggregate: 80.50%</p>
+                            <p class="text-xs text-gray-500">Backend language and database connectivity proficiency, supporting full-stack deployment troubleshooting.</p>
+                        </div>
+                        <!-- Security -->
+                        <div class="bg-gray-50 rounded-xl flow-card p-4 text-center fade-in border-t-2 border-red-500" style="border-top-color: var(--accent-color);">
+                            <p class="text-3xl mb-1">🚨</p>
+                            <h4 class="font-bold" style="color: var(--header-color);">Security Attack Knowledge</h4>
+                            <p class="text-sm text-gray-600 mb-1">Self-Study/Coursework</p>
+                            <p class="text-xs text-gray-500">Understanding common vulnerabilities (XSS, SQLi) to secure CI/CD pipelines and deployment configurations.</p>
+                        </div>
+                        <!-- Digital Marketing -->
+                        <div class="bg-gray-50 rounded-xl flow-card p-4 text-center fade-in border-t-2 border-orange-500" style="border-top-color: var(--accent-color);">
+                            <p class="text-3xl mb-1">📈</p>
+                            <h4 class="font-bold" style="color: var(--header-color);">Digital Marketing (Google)</h4>
+                            <p class="text-sm text-gray-600 mb-1">Google Certified</p>
+                            <p class="text-xs text-gray-500">Knowledge of marketing funnels, enabling better infrastructure planning for scalability and traffic surges.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24" style="background-color: var(--bg-primary); border-top: 1px solid #E5E7EB;">
+            <div class="container mx-auto max-w-3xl px-4 lg:px-8 text-center fade-in">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    I am actively seeking new challenges in infrastructure automation and optimization. Contact me directly.
+                </p>
+                <div class="flex flex-col space-y-4 md:flex-row md:space-x-8 md:space-y-0 justify-center">
+                    <a href="mailto:rutikkhairnar02@gmail.com" class="accent-bg text-white font-bold py-3 px-8 rounded-lg text-lg flow-card hover:opacity-90 flex items-center justify-center" style="background-color: var(--accent-color);">
+                        <span class="mr-2">📧</span> rutikkhairnar02@gmail.com
+                    </a>
+                    <a href="tel:+919512579232" class="header-bg text-white font-bold py-3 px-8 rounded-lg text-lg flow-card hover:opacity-90 flex items-center justify-center" style="background-color: var(--header-color);">
+                        <span class="mr-2">📞</span> +91 9512579232
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (ENHANCED) -->
+    <footer class="header-bg py-8">
+        <div class="container mx-auto max-w-7xl px-4 text-center text-gray-300 text-sm font-semibold">
+            <p>// Continuous Delivery. Cloud First. | Rutik Khairnar | Vapi, Gujarat //</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- SCROLL ANIMATION LOGIC (Fade In) ---
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.2, 
+                rootMargin: "0px 0px -100px 0px" 
+            };
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('visible');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+
+
+            // --- COST OPTIMIZATION CHART LOGIC ---
+            const chartElement = document.getElementById('costChart');
+            const savingsColor = getComputedStyle(document.documentElement).getPropertyValue('--savings-color').trim() || '#00C4FF';
+            const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim() || '#7A33FF';
+            const headerColor = getComputedStyle(document.documentElement).getPropertyValue('--header-color').trim() || '#1A202C';
+            const coralRed = getComputedStyle(document.documentElement).getPropertyValue('--secondary-accent').trim() || '#FF3366'; // Using the secondary accent color for the previous bill/contrast
+
+            if (chartElement) { 
+                const ctx = chartElement.getContext('2d');
+                // Updated Values
+                const originalBill = 987;
+                const savedAmount = 238.16;
+                const newBill = originalBill - savedAmount; 
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Previous Monthly Cost', 'Optimized Monthly Cost', 'Savings Achieved'],
+                        datasets: [{
+                            label: 'Cost (USD)',
+                            data: [originalBill, newBill, savedAmount],
+                            backgroundColor: [
+                                coralRed, /* Hot Pink/Red for old bill */
+                                savingsColor, /* Cyan for new bill */
+                                accentColor /* Violet for savings */
+                            ],
+                            borderColor: [
+                                coralRed,
+                                savingsColor,
+                                accentColor
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 1200,
+                            easing: 'easeInOutQuint'
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Monthly Cost (USD)',
+                                    color: headerColor
+                                },
+                                ticks: {
+                                    color: headerColor
+                                },
+                                grid: {
+                                    color: '#E5E7EB'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: headerColor,
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // --- NAV SCROLL HIGHLIGHTING ---
+            const sections = document.querySelectorAll('section');
+            const header = document.getElementById('header');
+            const allNavLinks = document.querySelectorAll('.nav-link');
+
+            let headerHeight = 0;
+            if (header) { 
+                headerHeight = header.offsetHeight;
+            }
+
+            const scrollObserverOptions = {
+                root: null,
+                rootMargin: `-${headerHeight}px 0px 0px 0px`,
+                threshold: 0.4
+            };
+
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        allNavLinks.forEach(link => {
+                            link.classList.remove('text-white');
+                            link.classList.add('text-gray-300');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('text-white');
+                                link.classList.remove('text-gray-300');
+                            }
+                        });
+                    }
+                });
+            }, scrollObserverOptions);
+
+            sections.forEach(section => {
+                scrollObserver.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
